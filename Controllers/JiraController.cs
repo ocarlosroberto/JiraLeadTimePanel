@@ -42,7 +42,7 @@ namespace JiraLeadTimePanel.Controllers
         [Route("{projectName}")]
         public async Task<IEnumerable<Card>> GetCards(string projectName)
         {
-            var url = string.Concat("https://jiracorp.ctsp.prod.cloud.ihf/rest/api/2/search?jqlproject in (",
+            var url = string.Concat("https://jiracorp.ctsp.prod.cloud.ihf/rest/api/2/search?jql=project in (",
                                     projectName,
                                     ") AND resolution=Unresolved AND (type = Epic OR (type in (Story, Task, Refinement, Spike) AND sprint in openSprints()))&maxResults=1000");
 
@@ -54,7 +54,7 @@ namespace JiraLeadTimePanel.Controllers
 
             foreach (var issue in project.issues)
             {
-                if (issue.fields.issuetype.name.IndexOf("Epic|Story") >= 0)
+                if ((issue.fields.issuetype.name == "Epic") || (issue.fields.issuetype.name == "Story"))
                 {
                     System.Threading.Thread.Sleep(500);
                     leadtime = await GetLeadtime(issue.key);
@@ -83,7 +83,7 @@ namespace JiraLeadTimePanel.Controllers
             card.parent = issue.fields.customfield_10001 != null ? issue.fields.customfield_10001 : issue.fields.parent != null ? issue.fields.parent.key : "";
             card.bcp = issue.fields.customfield_16600 != null ? issue.fields.customfield_16600.ToString() : "0";
             card.aggregatetimespent = issue.fields.aggregatetimespent != null ? (Convert.ToDecimal(issue.fields.aggregatetimespent) / 3600).ToString("0.00") : "0";
-            card.storyType = issue.fields.customfield_16195 != null ? issue.fields.customfield_16195.value : "";
+            card.storyType = issue.fields.customfield_16915 != null ? issue.fields.customfield_16915.value : "";
             card.bcpXhours = card.bcp == "0" || card.aggregatetimespent == "0" ? "n/a" : (Convert.ToDecimal(card.bcp) / Convert.ToDecimal(card.aggregatetimespent)).ToString("0.0");
 
             return card;
