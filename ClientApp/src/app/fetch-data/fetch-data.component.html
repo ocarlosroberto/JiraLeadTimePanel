@@ -1,8 +1,8 @@
-<h1 id="tableLabel">Weather forecast</h1>
+<h1 id="tableLabel">Jira</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
+<p *ngIf="!cards"><em>Loading...</em></p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecasts">
   <thead>
@@ -14,11 +14,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let forecast of forecasts">
-      <td>{{ forecast.date }}</td>
-      <td>{{ forecast.temperatureC }}</td>
-      <td>{{ forecast.temperatureF }}</td>
-      <td>{{ forecast.summary }}</td>
+    <tr *ngFor="let card of cards">
+      <td>{{ card.key }}</td>
+      <td>{{ card.summary }}</td>
+      <td>{{ card.status }}</td>
+      <td>{{ card.issuetype }}</td>
+      <td>{{ card.assignee }}</td>
+      <td>{{ card.leadtime }}</td>
+      <td>{{ card.parent }}</td>
+      <td>{{ card.bcp }}</td>
+      <td>{{ card.aggregatetimespent }}</td>
+      <td>{{ card.bcpXhours }}</td>
+      <td>{{ card.storyType }}</td>
+      <td>{{ card.observations }}</td>
     </tr>
   </tbody>
 </table>
