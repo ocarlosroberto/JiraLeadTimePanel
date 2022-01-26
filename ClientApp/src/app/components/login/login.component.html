@@ -1,0 +1,31 @@
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Jira Leadtime Panel</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="loginFrm">
+                    <div class="mb-3">
+                        <label for="user" class="form-label">racf</label>
+                        <input type="text" class="form-control" id="user" placeholder="racf" formControlName="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">senha</label>
+                        <input type="password" class="form-control" id="password" formControlName="password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">squad</label>
+                        <select class="form-control" formControlName="squad">
+                            <option value="">Selecione</option>
+                            <option *ngFor="let squad of squads" [value]="squad.id">{{squad.name}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="autheticateUser()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
