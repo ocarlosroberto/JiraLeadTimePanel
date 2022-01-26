@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { JiraService } from 'src/app/services/jira.service';
 
 @Component({
   selector: 'app-fetch-data',
@@ -10,14 +11,7 @@ export class FetchDataComponent {
   public cards: Card[];
   squad: string;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private activatedRoute: ActivatedRoute) {
-    http.get<Card[]>(baseUrl + 'jira/CCMCPLATC')
-      .subscribe(result => {
-        this.cards = result;
-      },
-        error => {
-          console.error(error);
-        });
+  constructor(private jiraService: JiraService, private activatedRoute: ActivatedRoute) {
   }
 
 
@@ -26,6 +20,11 @@ export class FetchDataComponent {
     this.activatedRoute.paramMap.subscribe(params => {
       console.log(params);
       this.squad = params.get('squad');
+
+      this.jiraService.getCards()
+        .subscribe(result => {
+          this.cards = result;
+        });
     });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from "@angular/router"
-import { HttpClient } from '@angular/common/http';
+import { JiraService } from 'src/app/services/jira.service';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +17,8 @@ export class LoginComponent implements OnInit {
     { id: "SQUAD2", name: "squad 2" },
     { id: "SQUAD3", name: "squad 3" },
   ];
-  route: string;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private formBuilder: FormBuilder, private router: Router) {
-    this.route = baseUrl + 'jira/user/';
+  constructor(private jiraService: JiraService, private formBuilder: FormBuilder, private router: Router) {
   }
 
   ngOnInit() {
@@ -44,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   autheticateUser() {
-    this.http.get<User>(this.route + this.loginFrm.value["username"])
+    this.jiraService.getUser(this.loginFrm.value["username"], this.loginFrm.value["password"])
       .subscribe(result => {
         this.user = result;
         console.log(this.user);

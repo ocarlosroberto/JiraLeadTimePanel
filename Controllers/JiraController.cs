@@ -17,24 +17,27 @@ namespace JiraLeadTimePanel.Controllers
     {
         private readonly ILogger<JiraController> _logger;
         private HttpClient client;
-        private byte[] cred;
+        private string cred;
 
         public JiraController(ILogger<JiraController> logger)
         {
             _logger = logger;
             client = new HttpClient();
-            cred = UTF8Encoding.UTF8.GetBytes("crfsmeu:crfs65");
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(cred));
+        }
+
+        private void GetToken()
+        {
+            cred = Request.Headers["Authorization"];
+            client.DefaultRequestHeaders.Add("Authorization", cred);
         }
 
         [HttpGet]
         [Route("user/{userName}")]
         public async Task<User> GetUser(string userName)
         {
+            GetToken();
             var url = string.Concat("https://jiracorp.ctsp.prod.cloud.ihf/rest/api/2/user?username=", userName);
-
             var response = await client.GetAsync(url);
-
             return JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync());
         }
 
@@ -42,6 +45,8 @@ namespace JiraLeadTimePanel.Controllers
         [Route("{projectName}")]
         public async Task<IEnumerable<Card>> GetCards(string projectName)
         {
+            GetToken();
+
             var url = string.Concat("https://jiracorp.ctsp.prod.cloud.ihf/rest/api/2/search?jql=project in (",
                                     projectName,
                                     ") AND resolution=Unresolved AND (type = Epic OR (type in (Story, Task, Refinement, Spike) AND sprint in openSprints()))&maxResults=1000");
@@ -91,6 +96,8 @@ namespace JiraLeadTimePanel.Controllers
 
         private async Task<string> GetLeadtime(string key)
         {
+            GetToken();
+
             var url = string.Concat("https://jiracorp.ctsp.prod.cloud.ihf/rest/agile/1.0/issue/", key, "?expand=changelog");
 
             var response = await client.GetAsync(url);
