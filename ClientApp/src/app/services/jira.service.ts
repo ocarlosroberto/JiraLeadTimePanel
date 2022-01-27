@@ -32,10 +32,10 @@ export class JiraService {
   }
 
 
-getCards(): Observable<Card[]> {
-  this.route = this.baseUrl + 'jira/CCMCPLATC';
+getCards(squad: string): Observable<Card[]> {
+  this.route = this.baseUrl + 'jira/';
 
-  return this.http.get<Card[]>(this.route, httpOptions)
+  return this.http.get<Card[]>(this.route + squad, httpOptions)
     .pipe(catchError((err) => {
       return throwError(err);
     }));

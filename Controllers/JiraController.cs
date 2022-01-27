@@ -38,6 +38,10 @@ namespace JiraLeadTimePanel.Controllers
             GetToken();
             var url = string.Concat("https://jiracorp.ctsp.prod.cloud.ihf/rest/api/2/user?username=", userName);
             var response = await client.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Acesso não autorizado");
+
             return JsonSerializer.Deserialize<User>(await response.Content.ReadAsStringAsync());
         }
 
@@ -52,6 +56,10 @@ namespace JiraLeadTimePanel.Controllers
                                     ") AND resolution=Unresolved AND (type = Epic OR (type in (Story, Task, Refinement, Spike) AND sprint in openSprints()))&maxResults=1000");
 
             var response = await client.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Erro ao obter cards");
+
             var project = JsonSerializer.Deserialize<Project>(await response.Content.ReadAsStringAsync());
 
             List<Card> cards = new List<Card>();
@@ -96,8 +104,6 @@ namespace JiraLeadTimePanel.Controllers
 
         private async Task<string> GetLeadtime(string key)
         {
-            GetToken();
-
             var url = string.Concat("https://jiracorp.ctsp.prod.cloud.ihf/rest/agile/1.0/issue/", key, "?expand=changelog");
 
             var response = await client.GetAsync(url);

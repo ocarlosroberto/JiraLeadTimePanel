@@ -21,7 +21,7 @@ export class FetchDataComponent {
       console.log(params);
       this.squad = params.get('squad');
 
-      this.jiraService.getCards()
+      this.jiraService.getCards(this.squad)
         .subscribe(result => {
           this.cards = result;
         });
