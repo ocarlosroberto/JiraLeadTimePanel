@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   }
   closePopup() {
     this.displayStyle = "none";
-    this.router.navigate(['/fetch-data', this.loginFrm.value["squad"]]);
+    this.router.navigate(['/dashboard', this.loginFrm.value["squad"]]);
   }
 
   autheticateUser() {

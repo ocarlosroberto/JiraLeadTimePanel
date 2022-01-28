@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LoginComponent } from './components/login/login.component';
     CounterComponent,
     FetchDataComponent,
     LoginComponent,
+    DashboardComponent,
 
   ],
   imports: [
@@ -32,6 +34,7 @@ import { LoginComponent } from './components/login/login.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'fetch-data/:squad', component: FetchDataComponent },
+      { path: 'dashboard/:squad', component: DashboardComponent },
       { path: 'login', component: LoginComponent },
     ])
   ],

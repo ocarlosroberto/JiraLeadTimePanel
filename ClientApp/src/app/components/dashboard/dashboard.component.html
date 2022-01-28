@@ -1,0 +1,40 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">feature</th>
+            <th scope="col">jira</th>
+            <th scope="col">tipo</th>
+            <th scope="col">descrição</th>
+            <th scope="col">leadtime</th>
+            <th scope="col">h/bcp</th>
+            <th scope="col">responsável</th>
+            <th scope="col">status</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let card of cards">
+
+        <tr>
+            <td>{{ card.parent }}</td>
+            <td>{{ card.key }}</td>
+            <td>{{ card.issuetype }}</td>
+            <td>{{ card.summary }}</td>
+            <td>{{ card.leadtime }}</td>
+            <td>{{ card.bcpXhours }}</td>
+            <td>{{ card.assignee }}</td>
+            <td>{{ card.status }}</td>
+            <td><button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title"
+                    data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle
+                    popover</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7">
+                <div><span class="font-weight-bold">story type:</span>{{card.storyType}}</div>
+                <div><span class="font-weight-bold">bcp:</span>{{card.bcp}}</div>
+                <div><span class="font-weight-bold">horas apontadas:</span>{{card.aggregatetimespent}}</div>
+                <div><span class="font-weight-bold">observação:</span>{{card.observations}}</div>
+            </td>
+        </tr>
+    </tbody>
+</table>

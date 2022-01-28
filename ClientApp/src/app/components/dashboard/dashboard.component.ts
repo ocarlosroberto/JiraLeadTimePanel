@@ -1,22 +1,19 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JiraService } from 'src/app/services/jira.service';
 
 @Component({
-  selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class FetchDataComponent {
+export class DashboardComponent implements OnInit {
   public cards: Card[];
   squad: string;
 
-  constructor(private jiraService: JiraService, private activatedRoute: ActivatedRoute) {
-  }
-
+  constructor(private jiraService: JiraService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
     this.activatedRoute.paramMap.subscribe(params => {
       this.squad = params.get('squad');
 
@@ -42,3 +39,4 @@ interface Card {
   storyType: string;
   observations: string;
 }
+
