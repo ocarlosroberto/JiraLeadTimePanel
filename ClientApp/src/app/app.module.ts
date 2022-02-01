@@ -5,10 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
@@ -19,10 +15,6 @@ import { ProgressBarComponent } from './shared/progress-bar/progress-bar.compone
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     DashboardComponent,
     LoginComponent,
     ProgressBarComponent
@@ -43,9 +35,7 @@ import { ProgressBarComponent } from './shared/progress-bar/progress-bar.compone
     MatIconModule,
 
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: '', component: LoginComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'dashboard/:squad/:name', component: DashboardComponent },
     ]),
