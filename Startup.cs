@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using ElectronNET.API;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -70,6 +72,8 @@ namespace JiraLeadTimePanel
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
         }
     }
 }
