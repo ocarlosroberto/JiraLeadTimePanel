@@ -1,0 +1,29 @@
+.progress-bar {
+    height: 20px;
+    width: 0;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+}
+
+.progress-bar.initial {
+    color: #000;
+    background-color: green;
+}
+
+.progress-bar.green {
+    background-color: green;
+}
+
+.progress-bar.yellow {
+    background-color: rgb(255,136,0);
+}
+
+.progress-bar.red {
+    background-color: red;
+}
+
+.progress-bar.black {
+    font-weight: normal;
+    background-color: black;
+}

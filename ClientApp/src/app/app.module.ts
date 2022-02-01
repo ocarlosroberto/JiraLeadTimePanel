@@ -14,6 +14,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { MatCardModule, MatIconModule, MatInputModule, MatTableModule, MatTabsModule, MatFormFieldModule, MatExpansionModule } from '@angular/material';
 import { LoginComponent } from './components/login/login.component';
+import { ProgressBarComponent } from './shared/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LoginComponent } from './components/login/login.component';
     CounterComponent,
     FetchDataComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
