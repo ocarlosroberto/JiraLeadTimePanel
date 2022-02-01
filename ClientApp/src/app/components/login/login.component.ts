@@ -9,7 +9,8 @@ import { JiraService } from 'src/app/services/jira.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  wait: boolean = false;
+  myOpacity: number = 1;
   loginFrm!: FormGroup;
   user: User;
   squads = [
@@ -42,15 +43,19 @@ export class LoginComponent implements OnInit {
   }
 
   autheticateUser() {
+    this.wait = true;
+    this.myOpacity = 0.25;
     this.jiraService.getUser(this.loginFrm.value["username"], this.loginFrm.value["password"])
       .subscribe(result => {
+        this.wait = false;
         this.user = result;
         this.displayStyle = "none";
         this.closePopup();
       },
         error => {
+          this.wait = false;
           console.error(error);
-          alert("Invalid User Name or Password");
+          alert("Usuário ou Senha inválidos");
         }
       );
   }

@@ -25,6 +25,9 @@ export class DashboardComponent implements OnInit {
   fullName: string;
   observations: string;
 
+  wait: boolean = false;
+  myOpacity: number = 1;
+
   epicsSource = new MatTableDataSource<Card>();
   displayedEpicsColumns: string[] = ['key', 'name', 'status', 'leadtime'];
 
@@ -38,13 +41,19 @@ export class DashboardComponent implements OnInit {
       this.squad = params.get('squad');
       this.fullName = params.get('name');
 
-      if(this.squad!=null && this.fullName!=null)
+      if (this.squad != null && this.fullName != null)
         this.authenticated = true;
       else
         this.authenticated = false;
 
+      this.wait = true;
+      this.myOpacity = 0.25;
+
       this.jiraService.getCards(this.squad)
         .subscribe(result => {
+          this.wait = false;
+          this.myOpacity = 1;
+          
           this.cards = result;
 
           this.epicsSource = new MatTableDataSource(this.cards.filter(card => card.issuetype === 'Epic'));
@@ -57,7 +66,7 @@ export class DashboardComponent implements OnInit {
     return localStorage.getItem(key);
   }
 
-  saveLocalStorage(key: string){
+  saveLocalStorage(key: string) {
     localStorage.setItem(key, this.observations);
     this.observations = "";
   }
