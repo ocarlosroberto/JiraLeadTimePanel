@@ -1,40 +1,165 @@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">feature</th>
-            <th scope="col">jira</th>
-            <th scope="col">tipo</th>
-            <th scope="col">descrição</th>
-            <th scope="col">leadtime</th>
-            <th scope="col">h/bcp</th>
-            <th scope="col">responsável</th>
-            <th scope="col">status</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody *ngFor="let card of cards">
+<div class="flex-container" *ngIf="authenticated">
+    <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel [expanded]=false>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Jira Leadtime Panel
+                </mat-panel-title>
+                <mat-panel-description>
+                    Olá {{fullName}}
+                    <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+    </mat-accordion>
 
-        <tr>
-            <td>{{ card.parent }}</td>
-            <td>{{ card.key }}</td>
-            <td>{{ card.issuetype }}</td>
-            <td>{{ card.summary }}</td>
-            <td>{{ card.leadtime }}</td>
-            <td>{{ card.bcpXhours }}</td>
-            <td>{{ card.assignee }}</td>
-            <td>{{ card.status }}</td>
-            <td><button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title"
-                    data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle
-                    popover</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="7">
-                <div><span class="font-weight-bold">story type:</span>{{card.storyType}}</div>
-                <div><span class="font-weight-bold">bcp:</span>{{card.bcp}}</div>
-                <div><span class="font-weight-bold">horas apontadas:</span>{{card.aggregatetimespent}}</div>
-                <div><span class="font-weight-bold">observação:</span>{{card.observations}}</div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <h2 style="padding-left: 20px; padding-top: 20px">Dashboard {{squadName}}</h2>
+
+    <mat-tab-group>
+        <mat-tab label="Features">
+            <mat-card>
+                <mat-card-title>Features</mat-card-title>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Filtro</mat-label>
+                    <input matInput style="width: 100%;" placeholder="Filtro" #input>
+                </mat-form-field>
+
+                <table mat-table [dataSource]="epicsSource" class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="key">
+                        <th mat-header-cell *matHeaderCellDef> card </th>
+                        <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> título </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef> status </th>
+                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="leadtime">
+                        <th mat-header-cell *matHeaderCellDef> leadtime </th>
+                        <td mat-cell *matCellDef="let element"> {{element.leadtime}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedEpicsColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedEpicsColumns;"></tr>
+
+                </table>
+            </mat-card>
+        </mat-tab>
+
+        <mat-tab label="Issues">
+            <mat-card>
+                <mat-card-title>Issues</mat-card-title>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Filtro</mat-label>
+                    <input matInput style="width: 100%;" placeholder="Filtro" #input>
+                </mat-form-field>
+
+                <table mat-table [dataSource]="issuesSource" class="mat-elevation-z8" multiTemplateDataRows>
+
+                    <ng-container matColumnDef="parent">
+                        <th mat-header-cell *matHeaderCellDef> feature </th>
+                        <td mat-cell *matCellDef="let element"> {{element.parent}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="key">
+                        <th mat-header-cell *matHeaderCellDef> jira </th>
+                        <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="issuetype">
+                        <th mat-header-cell *matHeaderCellDef> tipo </th>
+                        <td mat-cell *matCellDef="let element"> {{element.issuetype}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="summary">
+                        <th mat-header-cell *matHeaderCellDef> descrição </th>
+                        <td mat-cell *matCellDef="let element"> {{element.summary}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="leadtime">
+                        <th mat-header-cell *matHeaderCellDef> leadtime </th>
+                        <td mat-cell *matCellDef="let element"> {{element.leadtime}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="bcpXhours">
+                        <th mat-header-cell *matHeaderCellDef> h/bcp entrega </th>
+                        <td mat-cell *matCellDef="let element"> {{element.bcpXhours}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="assignee">
+                        <th mat-header-cell *matHeaderCellDef> responsável </th>
+                        <td mat-cell *matCellDef="let element"> {{element.assignee}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef> status </th>
+                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedIssuesColumns"></tr>
+
+                    <!-- Expanded Content Row -->
+                    <tr mat-row *matRowDef="let element; columns: displayedIssuesColumns;" class="example-element-row"
+                        [class.example-expanded-row]="details === element"
+                        (click)="details = details === element ? null : element"></tr>
+
+                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; " class="example-detail-row"></tr>
+
+                    <!-- Expanded Content Column -->
+                    <ng-container matColumnDef="expandedDetail">
+                        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedIssuesColumns.length">
+                            <div class="example-element-detail"
+                                [@detailExpand]="element == details ? 'expanded' : 'collapsed' ">
+
+                                <table>
+                                    <tr>
+                                        <td><b>story type:</b></td>
+                                        <td>{{element.storyType}}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>bcp:</b></td>
+                                        <td>{{element.bcp}}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>horas apontadas:</b></td>
+                                        <td>{{element.aggregatetimespent}}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>observação</b></td>
+                                        <td>{{getObservations(element.key)}}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <mat-form-field appearance="fill" [style.width.px]=800>
+                                                <mat-label>nova observação</mat-label>
+                                                <input [(ngModel)]="observations" matInput
+                                                    placeholder="ex. pendente da tarefa...">
+                                            </mat-form-field>
+                                        </td>
+                                        <td><button class="btn btn-primary"
+                                                (click)="saveLocalStorage(element.key)">Salvar</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                </table>
+
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
+</div>

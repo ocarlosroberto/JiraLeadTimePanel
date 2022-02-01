@@ -1,0 +1,120 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-column-parent {
+    width: 150px;
+    text-align: center;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-column-key{
+    width: 150px;
+    text-align: center;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-column-name{
+    width: 750px;
+    text-align: left;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-column-summary{
+    width: 400px;
+    text-align: left;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-column-issuetype{
+    width: 100px;
+    text-align: center;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-column-status {
+    width: 100px;
+    text-align: center;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-column-assignee {
+    width: 80px;
+    text-align: center;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-column-leadtime {
+    width: 150px;
+    text-align: center;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-column-bcpXhours {
+    width: 30x;
+    text-align: center;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mat-row:hover .mat-cell {
+    border-bottom-color: black;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+
+.example-element-row{
+    cursor: pointer;
+}
+
+.example-element-detail{
+    overflow: hidden;
+    display: flex;
+}
+
+tr.example-detail-row{
+    height: 0;
+}
