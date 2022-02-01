@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   user: User;
   squads = [
     { id: "CCMCPLATC", name: "cash plataformas comerciais" },
-    { id: "SQUAD2", name: "squad 2" },
-    { id: "SQUAD3", name: "squad 3" },
+    { id: "CCMRARRECA", name: "gestão de arrecadação" },
+    { id: "CCMRTRANSP", name: "transformação pp e benefício inss" },
   ];
 
   constructor(private jiraService: JiraService, private formBuilder: FormBuilder, private router: Router) {
@@ -38,15 +38,13 @@ export class LoginComponent implements OnInit {
   }
   closePopup() {
     this.displayStyle = "none";
-    this.router.navigate(['/dashboard', this.loginFrm.value["squad"]]);
+    this.router.navigate(['/dashboard', this.loginFrm.value["squad"], this.user.displayName.split(" ")[0]]);
   }
 
   autheticateUser() {
     this.jiraService.getUser(this.loginFrm.value["username"], this.loginFrm.value["password"])
       .subscribe(result => {
         this.user = result;
-        console.log(this.user);
-
         this.displayStyle = "none";
         this.closePopup();
       },
