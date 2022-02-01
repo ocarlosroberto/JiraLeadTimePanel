@@ -31,7 +31,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="autheticateUser()">Submit</button>
+                    <button type="button" class="btn btn-primary" [disabled]="!loginFrm.valid" (click)="autheticateUser()">Submit</button>
                 </div>
             </div>
         </div>

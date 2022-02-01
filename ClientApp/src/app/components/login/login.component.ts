@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router"
 import { JiraService } from 'src/app/services/jira.service';
 
@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginFrm = this.formBuilder.group({
-      username: new FormControl(""),
-      password: new FormControl(""),
-      squad: new FormControl("")
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      squad: ['', Validators.required]
     })
 
     this.openPopup();
