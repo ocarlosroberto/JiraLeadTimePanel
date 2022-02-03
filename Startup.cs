@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using ElectronNET.API;
+using JiraLeadTimePanel.Domain.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +24,9 @@ namespace JiraLeadTimePanel
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IUserHandler, UserHandler>();
+            services.AddTransient<ICardHandler, CardHandler>();
+            
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

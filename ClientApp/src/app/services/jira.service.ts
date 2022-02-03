@@ -23,7 +23,7 @@ export class JiraService {
 
   getUser(username: string, password: string): Observable<User> {
     httpOptions.headers = httpOptions.headers.set('Authorization', 'Basic ' + btoa(username + ':' + password));
-    this.route = this.baseUrl + 'jira/user/';
+    this.route = this.baseUrl + 'jira/v1/user/';
 
     return this.http.get<User>(this.route + username, httpOptions)
       .pipe(catchError((err) => {
@@ -33,7 +33,7 @@ export class JiraService {
 
 
 getCards(squad: string): Observable<Card[]> {
-  this.route = this.baseUrl + 'jira/';
+  this.route = this.baseUrl + 'jira/v1/card/';
 
   return this.http.get<Card[]>(this.route + squad, httpOptions)
     .pipe(catchError((err) => {

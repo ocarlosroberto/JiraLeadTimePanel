@@ -1,6 +1,6 @@
-namespace JiraLeadTimePanel.Models
+namespace JiraLeadTimePanel.Domain.Commands.Responses
 {
-    public class Card
+    public class CardResponse
     {
         public string key { get; set; }
         public string summary { get; set; }

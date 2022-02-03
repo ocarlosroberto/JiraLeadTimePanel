@@ -1,6 +1,6 @@
-namespace JiraLeadTimePanel.Models
+namespace JiraLeadTimePanel.Domain.Commands.Responses
 {
-    public class User
+    public class UserResponse
     {
         public string name { get; set; }
         public string emailAddress { get; set; }
