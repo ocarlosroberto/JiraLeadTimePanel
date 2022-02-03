@@ -51,14 +51,22 @@ export class DashboardComponent implements OnInit {
 
       this.jiraService.getCards(this.squad)
         .subscribe(result => {
+          console.log(result);
           this.wait = false;
           this.myOpacity = 1;
-          
+
           this.cards = result;
 
           this.epicsSource = new MatTableDataSource(this.cards.filter(card => card.issuetype === 'Epic'));
           this.issuesSource = new MatTableDataSource(this.cards.filter(card => card.issuetype !== 'Epic'));
-        });
+        },
+          error => {
+            this.wait = false;
+            this.myOpacity = 1;
+            console.error(error);
+            alert("Erro ao buscar cards");
+          }
+        );
     });
   }
 

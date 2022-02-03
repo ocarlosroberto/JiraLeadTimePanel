@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
       },
         error => {
           this.wait = false;
+          this.displayStyle = "none";
           console.error(error);
           alert("Usuário ou Senha inválidos");
         }
